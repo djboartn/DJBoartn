@@ -1,141 +1,488 @@
-nav {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 1rem 2rem; border-bottom: 1px solid var(--border);
-  background: rgba(12,12,20,0.97); position: sticky; top: 0; z-index: 10;
-}
-.logo { font-family: var(--font); font-size: 30px; letter-spacing: 4px; color: var(--text); }
-.logo span { color: var(--accent); }
-.nav-links { display: flex; gap: 0.5rem; }
-.nav-btn {
-  background: none; border: none; color: var(--muted); font-family: var(--body);
-  font-size: 10px; letter-spacing: 1px; text-transform: uppercase; cursor: pointer;
-  padding: 6px 10px; border-radius: 4px; transition: all 0.2s;
-}
-.nav-btn:hover, .nav-btn.active { color: var(--accent); background: rgba(124,92,252,0.1); }
-
-.section { display: none; padding: 2rem 2rem; max-width: 900px; margin: 0 auto; }
-.section.active { display: block; }
-
-/* HOME */
-.hero {
-  text-align: center; padding: 3rem 2rem 2.5rem;
-  border-bottom: 1px solid var(--border);
-  background: radial-gradient(ellipse at 50% -10%, rgba(124,92,252,0.18) 0%, transparent 65%);
-}
-.hero-tag { font-size: 10px; letter-spacing: 3px; color: var(--accent2); text-transform: uppercase; margin-bottom: 0.4rem; }
-.hero-name { font-family: var(--font); font-size: 80px; line-height: 1; letter-spacing: 6px; margin-bottom: 0.3rem; }
-.hero-name span { color: var(--accent); }
-.hero-realname { font-size: 11px; color: var(--muted); letter-spacing: 2px; margin-bottom: 0.4rem; }
-.hero-sub { color: var(--muted); letter-spacing: 2px; font-size: 10px; text-transform: uppercase; margin-bottom: 1.5rem; }
-.hero-cta {
-  background: var(--accent); color: #fff; border: none; font-family: var(--font);
-  font-size: 18px; letter-spacing: 2px; padding: 10px 28px; cursor: pointer;
-  border-radius: 4px; transition: all 0.2s; text-decoration: none; display: inline-block;
-}
-.hero-cta:hover { background: var(--accent2); transform: scale(1.03); }
-
-.section-title {
-  font-family: var(--font); font-size: 34px; letter-spacing: 3px;
-  margin-bottom: 1.5rem; border-left: 3px solid var(--accent); padding-left: 12px;
-}
-.section-title span { color: var(--accent); }
-
-.info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
-.info-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; }
-.info-card .ic-label { font-size: 9px; letter-spacing: 2px; color: var(--accent2); text-transform: uppercase; margin-bottom: 0.4rem; }
-.info-card .ic-val { font-family: var(--font); font-size: 20px; letter-spacing: 1px; color: var(--text); }
-.info-card .ic-desc { font-size: 11px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
-
-/* INFO */
-.genres { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2rem; }
-.genre-tag { border: 1px solid var(--border); color: var(--muted); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 7px 16px; border-radius: 20px; background: var(--surface2); }
-.genre-tag.hot { border-color: var(--accent); color: var(--accent); background: rgba(124,92,252,0.08); font-size: 11px; padding: 8px 18px; }
-
-.bio-text { color: var(--muted); line-height: 1.9; font-size: 12px; max-width: 580px; margin-bottom: 1.5rem; }
-
-.ref-list { margin-bottom: 2rem; }
-.ref-item { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 0.9rem 1.25rem; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; }
-.ref-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
-.ref-name { font-family: var(--font); font-size: 16px; letter-spacing: 1px; color: var(--text); }
-.ref-type { font-size: 10px; color: var(--muted); margin-top: 2px; }
-
-/* KALENDER */
-.cal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; }
-.cal-month { font-family: var(--font); font-size: 28px; letter-spacing: 2px; }
-.cal-nav { display: flex; gap: 8px; }
-.cal-nav button { background: var(--surface); border: 1px solid var(--border); color: var(--text); width: 32px; height: 32px; border-radius: 4px; cursor: pointer; font-size: 14px; transition: all 0.15s; }
-.cal-nav button:hover { border-color: var(--accent); color: var(--accent); }
-
-.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; margin-bottom: 1.5rem; }
-.cal-day-name { text-align: center; font-size: 9px; letter-spacing: 1px; color: var(--muted); text-transform: uppercase; padding: 6px 0; }
-.cal-cell { aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 6px; cursor: pointer; font-size: 12px; position: relative; transition: all 0.15s; border: 1px solid transparent; user-select: none; }
-.cal-cell:hover:not(.empty):not(.booked):not(.past) { background: var(--surface2); border-color: rgba(124,92,252,0.3); }
-.cal-cell.empty { cursor: default; }
-.cal-cell.booked { background: rgba(252,92,138,0.12); border-color: rgba(252,92,138,0.35); cursor: default; }
-.cal-cell.booked .day-num { color: var(--accent2); font-weight: bold; }
-.cal-cell.selected { background: rgba(124,92,252,0.15); border-color: var(--accent); }
-.cal-cell.today { border-color: rgba(92,252,184,0.4); }
-.cal-cell.past { opacity: 0.3; cursor: default; }
-.dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent2); margin-top: 2px; }
-
-.legend { display: flex; gap: 1.5rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
-.leg-item { display: flex; align-items: center; gap: 6px; font-size: 10px; color: var(--muted); }
-.leg-dot { width: 10px; height: 10px; border-radius: 2px; }
-.leg-dot.booked-dot { background: rgba(252,92,138,0.3); border: 1px solid rgba(252,92,138,0.5); }
-.leg-dot.free-dot { background: rgba(124,92,252,0.2); border: 1px solid var(--accent); }
-
-.bookings-list { margin-bottom: 1.5rem; }
-.booking-item { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 0.9rem 1.25rem; margin-bottom: 8px; display: flex; align-items: center; gap: 1rem; }
-.booking-date-box { background: var(--accent2); border-radius: 4px; padding: 4px 8px; text-align: center; min-width: 44px; flex-shrink: 0; }
-.bd-day { font-family: var(--font); font-size: 20px; line-height: 1; color: #fff; }
-.bd-mon { font-size: 9px; letter-spacing: 1px; color: rgba(255,255,255,0.8); text-transform: uppercase; }
-.booking-info { flex: 1; }
-.bi-name { font-family: var(--font); font-size: 16px; letter-spacing: 1px; }
-.bi-detail { font-size: 10px; color: var(--muted); margin-top: 2px; }
-.booked-badge { font-size: 9px; letter-spacing: 1px; text-transform: uppercase; background: rgba(252,92,138,0.12); color: var(--accent2); border: 1px solid rgba(252,92,138,0.3); padding: 3px 8px; border-radius: 20px; }
-.no-bookings { color: var(--muted); font-size: 11px; margin-bottom: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center; }
-
-.admin-toggle-btn { background: none; border: 1px solid var(--border); color: var(--muted); font-family: var(--body); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; padding: 5px 12px; border-radius: 4px; cursor: pointer; transition: all 0.2s; margin-bottom: 1.5rem; }
-.admin-toggle-btn:hover { border-color: var(--accent); color: var(--accent); }
-
-.admin-panel { background: var(--surface); border: 1px solid rgba(124,92,252,0.3); border-radius: 8px; padding: 1.25rem; margin-bottom: 1.5rem; }
-.admin-panel h3 { font-family: var(--font); font-size: 20px; letter-spacing: 2px; margin-bottom: 1rem; color: var(--accent); }
-.form-row { margin-bottom: 0.75rem; }
-.form-row label { display: block; font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
-.form-row input, .form-row select, .form-row textarea { width: 100%; background: var(--surface2); border: 1px solid var(--border); color: var(--text); font-family: var(--body); font-size: 12px; padding: 7px 10px; border-radius: 4px; outline: none; transition: border 0.15s; }
-.form-row input:focus, .form-row select:focus, .form-row textarea:focus { border-color: var(--accent); }
-.form-row textarea { resize: vertical; min-height: 65px; }
-.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-.add-btn { background: var(--accent); color: #fff; border: none; font-family: var(--font); font-size: 16px; letter-spacing: 2px; padding: 8px 20px; cursor: pointer; border-radius: 4px; transition: all 0.2s; margin-top: 0.25rem; }
-.add-btn:hover { background: var(--accent2); }
-.booking-admin-item { display: flex; align-items: center; justify-content: space-between; background: var(--surface2); border-radius: 6px; padding: 8px 12px; margin-bottom: 6px; }
-.del-btn { background: none; border: 1px solid rgba(252,92,138,0.3); color: var(--accent2); font-size: 11px; padding: 3px 8px; border-radius: 4px; cursor: pointer; transition: all 0.15s; font-family: var(--body); }
-.del-btn:hover { background: rgba(252,92,138,0.1); }
-
-.book-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; margin-top: 1rem; }
-.book-panel h3 { font-family: var(--font); font-size: 20px; letter-spacing: 2px; margin-bottom: 0.75rem; color: var(--accent); }
-.submit-btn { background: var(--accent); color: #fff; border: none; font-family: var(--font); font-size: 18px; letter-spacing: 2px; padding: 10px 24px; cursor: pointer; border-radius: 4px; margin-top: 0.5rem; transition: all 0.2s; width: 100%; }
-.submit-btn:hover { background: var(--accent2); }
-.success-msg { background: rgba(92,252,184,0.07); border: 1px solid rgba(92,252,184,0.25); color: var(--accentg); padding: 0.9rem; border-radius: 6px; text-align: center; font-size: 11px; line-height: 1.6; display: none; margin-top: 0.75rem; }
-.sel-date-info { font-size: 11px; color: var(--muted); margin-bottom: 0.75rem; }
-.sel-date-info span { color: var(--accent); }
-
-/* CONTACT */
-.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
-.contact-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; text-align: center; }
-.cc-icon { font-size: 28px; margin-bottom: 0.5rem; }
-.cc-label { font-size: 9px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; }
-.cc-val { font-size: 13px; color: var(--accent); word-break: break-all; }
-
-/* MOBILE */
-@media (max-width: 600px) {
-  nav { padding: 0.75rem 1rem; }
-  .hero-name { font-size: 52px; }
-  .section { padding: 1.5rem 1rem; }
-  .form-grid { grid-template-columns: 1fr; }
-  .hero { padding: 2rem 1rem 1.5rem; }
-}
-⚙ Beheer boekingen (DJ login)
-
-
-Sluiten
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DJ Boartn – Kasper Ysebaert</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0c0c14;
+      --surface: #13131f;
+      --surface2: #1c1c2e;
+      --accent: #7c5cfc;
+      --accent2: #fc5c8a;
+      --accentg: #5cfcb8;
+      --text: #f0eeff;
+      --muted: #8880aa;
+      --border: rgba(124,92,252,0.15);
+      --font: 'Bebas Neue', sans-serif;
+      --body: 'Space Mono', monospace;
+    }
+    html, body { min-height: 100vh; background: var(--bg); color: var(--text); font-family: var(--body); font-size: 13px; }
+ 
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2rem; border-bottom: 1px solid var(--border);
+      background: rgba(12,12,20,0.97); position: sticky; top: 0; z-index: 10;
+    }
+    .logo { font-family: var(--font); font-size: 30px; letter-spacing: 4px; color: var(--text); }
+    .logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 0.5rem; }
+    .nav-btn {
+      background: none; border: none; color: var(--muted); font-family: var(--body);
+      font-size: 10px; letter-spacing: 1px; text-transform: uppercase; cursor: pointer;
+      padding: 6px 10px; border-radius: 4px; transition: all 0.2s;
+    }
+    .nav-btn:hover, .nav-btn.active { color: var(--accent); background: rgba(124,92,252,0.1); }
+ 
+    .section { display: none; padding: 2rem 2rem; max-width: 900px; margin: 0 auto; }
+    .section.active { display: block; }
+ 
+    /* HOME */
+    .hero {
+      text-align: center; padding: 3rem 2rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+      background: radial-gradient(ellipse at 50% -10%, rgba(124,92,252,0.18) 0%, transparent 65%);
+    }
+    .hero-tag { font-size: 10px; letter-spacing: 3px; color: var(--accent2); text-transform: uppercase; margin-bottom: 0.4rem; }
+    .hero-name { font-family: var(--font); font-size: 80px; line-height: 1; letter-spacing: 6px; margin-bottom: 0.3rem; }
+    .hero-name span { color: var(--accent); }
+    .hero-realname { font-size: 11px; color: var(--muted); letter-spacing: 2px; margin-bottom: 0.4rem; }
+    .hero-sub { color: var(--muted); letter-spacing: 2px; font-size: 10px; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .hero-cta {
+      background: var(--accent); color: #fff; border: none; font-family: var(--font);
+      font-size: 18px; letter-spacing: 2px; padding: 10px 28px; cursor: pointer;
+      border-radius: 4px; transition: all 0.2s; text-decoration: none; display: inline-block;
+    }
+    .hero-cta:hover { background: var(--accent2); transform: scale(1.03); }
+ 
+    .section-title {
+      font-family: var(--font); font-size: 34px; letter-spacing: 3px;
+      margin-bottom: 1.5rem; border-left: 3px solid var(--accent); padding-left: 12px;
+    }
+    .section-title span { color: var(--accent); }
+ 
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; }
+    .info-card .ic-label { font-size: 9px; letter-spacing: 2px; color: var(--accent2); text-transform: uppercase; margin-bottom: 0.4rem; }
+    .info-card .ic-val { font-family: var(--font); font-size: 20px; letter-spacing: 1px; color: var(--text); }
+    .info-card .ic-desc { font-size: 11px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
+ 
+    /* INFO */
+    .genres { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2rem; }
+    .genre-tag { border: 1px solid var(--border); color: var(--muted); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 7px 16px; border-radius: 20px; background: var(--surface2); }
+    .genre-tag.hot { border-color: var(--accent); color: var(--accent); background: rgba(124,92,252,0.08); font-size: 11px; padding: 8px 18px; }
+ 
+    .bio-text { color: var(--muted); line-height: 1.9; font-size: 12px; max-width: 580px; margin-bottom: 1.5rem; }
+ 
+    .ref-list { margin-bottom: 2rem; }
+    .ref-item { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 0.9rem 1.25rem; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; }
+    .ref-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+    .ref-name { font-family: var(--font); font-size: 16px; letter-spacing: 1px; color: var(--text); }
+    .ref-type { font-size: 10px; color: var(--muted); margin-top: 2px; }
+ 
+    /* KALENDER */
+    .cal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; }
+    .cal-month { font-family: var(--font); font-size: 28px; letter-spacing: 2px; }
+    .cal-nav { display: flex; gap: 8px; }
+    .cal-nav button { background: var(--surface); border: 1px solid var(--border); color: var(--text); width: 32px; height: 32px; border-radius: 4px; cursor: pointer; font-size: 14px; transition: all 0.15s; }
+    .cal-nav button:hover { border-color: var(--accent); color: var(--accent); }
+ 
+    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; margin-bottom: 1.5rem; }
+    .cal-day-name { text-align: center; font-size: 9px; letter-spacing: 1px; color: var(--muted); text-transform: uppercase; padding: 6px 0; }
+    .cal-cell { aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 6px; cursor: pointer; font-size: 12px; position: relative; transition: all 0.15s; border: 1px solid transparent; user-select: none; }
+    .cal-cell:hover:not(.empty):not(.booked):not(.past) { background: var(--surface2); border-color: rgba(124,92,252,0.3); }
+    .cal-cell.empty { cursor: default; }
+    .cal-cell.booked { background: rgba(252,92,138,0.12); border-color: rgba(252,92,138,0.35); cursor: default; }
+    .cal-cell.booked .day-num { color: var(--accent2); font-weight: bold; }
+    .cal-cell.selected { background: rgba(124,92,252,0.15); border-color: var(--accent); }
+    .cal-cell.today { border-color: rgba(92,252,184,0.4); }
+    .cal-cell.past { opacity: 0.3; cursor: default; }
+    .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent2); margin-top: 2px; }
+ 
+    .legend { display: flex; gap: 1.5rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
+    .leg-item { display: flex; align-items: center; gap: 6px; font-size: 10px; color: var(--muted); }
+    .leg-dot { width: 10px; height: 10px; border-radius: 2px; }
+    .leg-dot.booked-dot { background: rgba(252,92,138,0.3); border: 1px solid rgba(252,92,138,0.5); }
+    .leg-dot.free-dot { background: rgba(124,92,252,0.2); border: 1px solid var(--accent); }
+ 
+    .bookings-list { margin-bottom: 1.5rem; }
+    .booking-item { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 0.9rem 1.25rem; margin-bottom: 8px; display: flex; align-items: center; gap: 1rem; }
+    .booking-date-box { background: var(--accent2); border-radius: 4px; padding: 4px 8px; text-align: center; min-width: 44px; flex-shrink: 0; }
+    .bd-day { font-family: var(--font); font-size: 20px; line-height: 1; color: #fff; }
+    .bd-mon { font-size: 9px; letter-spacing: 1px; color: rgba(255,255,255,0.8); text-transform: uppercase; }
+    .booking-info { flex: 1; }
+    .bi-name { font-family: var(--font); font-size: 16px; letter-spacing: 1px; }
+    .bi-detail { font-size: 10px; color: var(--muted); margin-top: 2px; }
+    .booked-badge { font-size: 9px; letter-spacing: 1px; text-transform: uppercase; background: rgba(252,92,138,0.12); color: var(--accent2); border: 1px solid rgba(252,92,138,0.3); padding: 3px 8px; border-radius: 20px; }
+    .no-bookings { color: var(--muted); font-size: 11px; margin-bottom: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center; }
+ 
+    .admin-toggle-btn { background: none; border: 1px solid var(--border); color: var(--muted); font-family: var(--body); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; padding: 5px 12px; border-radius: 4px; cursor: pointer; transition: all 0.2s; margin-bottom: 1.5rem; }
+    .admin-toggle-btn:hover { border-color: var(--accent); color: var(--accent); }
+ 
+    .admin-panel { background: var(--surface); border: 1px solid rgba(124,92,252,0.3); border-radius: 8px; padding: 1.25rem; margin-bottom: 1.5rem; }
+    .admin-panel h3 { font-family: var(--font); font-size: 20px; letter-spacing: 2px; margin-bottom: 1rem; color: var(--accent); }
+    .form-row { margin-bottom: 0.75rem; }
+    .form-row label { display: block; font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .form-row input, .form-row select, .form-row textarea { width: 100%; background: var(--surface2); border: 1px solid var(--border); color: var(--text); font-family: var(--body); font-size: 12px; padding: 7px 10px; border-radius: 4px; outline: none; transition: border 0.15s; }
+    .form-row input:focus, .form-row select:focus, .form-row textarea:focus { border-color: var(--accent); }
+    .form-row textarea { resize: vertical; min-height: 65px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .add-btn { background: var(--accent); color: #fff; border: none; font-family: var(--font); font-size: 16px; letter-spacing: 2px; padding: 8px 20px; cursor: pointer; border-radius: 4px; transition: all 0.2s; margin-top: 0.25rem; }
+    .add-btn:hover { background: var(--accent2); }
+    .booking-admin-item { display: flex; align-items: center; justify-content: space-between; background: var(--surface2); border-radius: 6px; padding: 8px 12px; margin-bottom: 6px; }
+    .del-btn { background: none; border: 1px solid rgba(252,92,138,0.3); color: var(--accent2); font-size: 11px; padding: 3px 8px; border-radius: 4px; cursor: pointer; transition: all 0.15s; font-family: var(--body); }
+    .del-btn:hover { background: rgba(252,92,138,0.1); }
+ 
+    .book-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; margin-top: 1rem; }
+    .book-panel h3 { font-family: var(--font); font-size: 20px; letter-spacing: 2px; margin-bottom: 0.75rem; color: var(--accent); }
+    .submit-btn { background: var(--accent); color: #fff; border: none; font-family: var(--font); font-size: 18px; letter-spacing: 2px; padding: 10px 24px; cursor: pointer; border-radius: 4px; margin-top: 0.5rem; transition: all 0.2s; width: 100%; }
+    .submit-btn:hover { background: var(--accent2); }
+    .success-msg { background: rgba(92,252,184,0.07); border: 1px solid rgba(92,252,184,0.25); color: var(--accentg); padding: 0.9rem; border-radius: 6px; text-align: center; font-size: 11px; line-height: 1.6; display: none; margin-top: 0.75rem; }
+    .sel-date-info { font-size: 11px; color: var(--muted); margin-bottom: 0.75rem; }
+    .sel-date-info span { color: var(--accent); }
+ 
+    /* CONTACT */
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+    .contact-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; text-align: center; }
+    .cc-icon { font-size: 28px; margin-bottom: 0.5rem; }
+    .cc-label { font-size: 9px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; }
+    .cc-val { font-size: 13px; color: var(--accent); word-break: break-all; }
+ 
+    /* MOBILE */
+    @media (max-width: 600px) {
+      nav { padding: 0.75rem 1rem; }
+      .hero-name { font-size: 52px; }
+      .section { padding: 1.5rem 1rem; }
+      .form-grid { grid-template-columns: 1fr; }
+      .hero { padding: 2rem 1rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+ 
+<nav>
+  <div class="logo">DJ <span>BOARTN</span></div>
+  <div class="nav-links">
+    <button class="nav-btn active" onclick="showSection('home')">Home</button>
+    <button class="nav-btn" onclick="showSection('info')">Info</button>
+    <button class="nav-btn" onclick="showSection('calendar')">Kalender</button>
+    <button class="nav-btn" onclick="showSection('contact')">Contact</button>
+  </div>
+</nav>
+ 
+<!-- HOME -->
+<div id="home" class="section active" style="padding:0; max-width:100%;">
+  <div class="hero">
+    <div class="hero-tag">DJ uit West-Vlaanderen · Waregem &amp; omstreken</div>
+    <div class="hero-name">DJ <span>BOARTN</span></div>
+    <div class="hero-realname">Kasper Ysebaert</div>
+    <div class="hero-sub">Afro House · House · Techno · Hip-Hop</div>
+    <button class="hero-cta" onclick="showSection('calendar')">BOEK EEN DATUM</button>
+  </div>
+  <div style="padding: 2rem; max-width: 900px; margin: 0 auto;">
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="ic-label">Leeftijd</div>
+        <div class="ic-val">17 JAAR</div>
+        <div class="ic-desc">Jong talent met een scherp oor voor de dansvloer</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-label">Ervaring</div>
+        <div class="ic-val">2 JAAR</div>
+        <div class="ic-desc">Sweet 16's, 18's, chiro-events en bar-optredens</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-label">Regio</div>
+        <div class="ic-val">WAREGEM</div>
+        <div class="ic-desc">West-Vlaanderen en ruime omgeving</div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:1rem;">
+      <button class="hero-cta" onclick="showSection('info')" style="font-size:14px;padding:8px 20px;">MEER OVER MIJ →</button>
+    </div>
+  </div>
+</div>
+ 
+<!-- INFO -->
+<div id="info" class="section">
+  <div class="section-title">OVER <span>MIJ</span></div>
+  <p class="bio-text">
+    Ik ben Kasper Ysebaert, beter bekend als DJ Boartn — 17 jaar en al 2 jaar actief achter de draaitafels.
+    Ik ben opgegroeid in de regio Waregem en begon al snel optredens te draaien op sweet 16's en sweet 18's bij vrienden en kennissen.
+    Ondertussen ben ik ook een vaste naam op chiro-avonden van Chiro De Ginste en Chiro Meulebeke, en draai ik regelmatig in bar Caballo in Waregem.
+    Mijn sets zijn altijd op maat van het publiek — van warme afro house grooves tot energieke techno en hiphop.
+  </p>
+ 
+  <div class="section-title" style="font-size:24px;">GENRES</div>
+  <div class="genres">
+    <span class="genre-tag hot">Afro House</span>
+    <span class="genre-tag hot">House</span>
+    <span class="genre-tag hot">Techno</span>
+    <span class="genre-tag hot">Hip-Hop</span>
+  </div>
+ 
+  <div class="section-title" style="font-size:24px;">REFERENTIES</div>
+  <div class="ref-list">
+    <div class="ref-item"><div class="ref-dot"></div><div><div class="ref-name">Sweet 16's &amp; 18's</div><div class="ref-type">Privé verjaardagsfeesten · regio Waregem</div></div></div>
+    <div class="ref-item"><div class="ref-dot"></div><div><div class="ref-name">Bar Caballo</div><div class="ref-type">Bar nights · Waregem</div></div></div>
+    <div class="ref-item"><div class="ref-dot"></div><div><div class="ref-name">Chiro De Ginste</div><div class="ref-type">Chiro-evenementen</div></div></div>
+    <div class="ref-item"><div class="ref-dot"></div><div><div class="ref-name">Chiro Meulebeke</div><div class="ref-type">Chiro-evenementen</div></div></div>
+  </div>
+</div>
+ 
+<!-- KALENDER -->
+<div id="calendar" class="section">
+  <div class="section-title">KALENDER</div>
+ 
+  <button class="admin-toggle-btn" onclick="toggleAdmin()">⚙ Beheer boekingen (DJ login)</button>
+ 
+  <div id="adminPanel" style="display:none;">
+    <div class="admin-panel">
+      <h3>BOEKING TOEVOEGEN</h3>
+      <div class="form-grid">
+        <div class="form-row"><label>Datum</label><input type="date" id="aDatum"></div>
+        <div class="form-row"><label>Venue / naam</label><input type="text" id="aVenue" placeholder="Bv. Bar Caballo"></div>
+      </div>
+      <div class="form-grid">
+        <div class="form-row"><label>Stad</label><input type="text" id="aStad" placeholder="Bv. Waregem"></div>
+        <div class="form-row"><label>Tijdstip</label><input type="text" id="aTijd" placeholder="Bv. 21:00 – 02:00"></div>
+      </div>
+      <button class="add-btn" onclick="addBooking()">+ TOEVOEGEN</button>
+      <div style="margin-top:1rem;" id="adminList"></div>
+    </div>
+  </div>
+ 
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot booked-dot"></div> Al geboekt</div>
+    <div class="leg-item"><div class="leg-dot free-dot"></div> Geselecteerd</div>
+  </div>
+ 
+  <div class="bookings-list" id="bookingsList"></div>
+ 
+  <div class="cal-header">
+    <div class="cal-month" id="calMonth"></div>
+    <div class="cal-nav">
+      <button onclick="changeMonth(-1)">&#8249;</button>
+      <button onclick="changeMonth(1)">&#8250;</button>
+    </div>
+  </div>
+  <div class="cal-grid" id="calGrid"></div>
+ 
+  <div id="bookForm" style="display:none;">
+    <div class="book-panel">
+      <h3>DATUM AANVRAGEN</h3>
+      <p class="sel-date-info">Geselecteerde datum: <span id="selDateTxt">—</span></p>
+      <div class="form-grid">
+        <div class="form-row"><label>Jouw naam</label><input type="text" id="fName" placeholder="Voor- en achternaam"></div>
+        <div class="form-row"><label>Event / venue</label><input type="text" id="fVenue" placeholder="Bv. Sweet 18 Jana"></div>
+      </div>
+      <div class="form-grid">
+        <div class="form-row"><label>E-mailadres</label><input type="email" id="fEmail" placeholder="jouw@email.be"></div>
+        <div class="form-row"><label>Telefoonnummer</label><input type="text" id="fPhone" placeholder="+32 ..."></div>
+      </div>
+      <div class="form-row">
+        <label>Type event</label>
+        <select id="fType">
+          <option>Sweet 16</option><option>Sweet 18</option><option>Verjaardag</option>
+          <option>Chiro-event</option><option>Bar night</option><option>Andere</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Extra info</label>
+        <textarea id="fMsg" placeholder="Gewenste muziekstijl, duur set, locatie..."></textarea>
+      </div>
+      <button class="submit-btn" onclick="submitForm()">AANVRAAG VERSTUREN</button>
+      <div class="success-msg" id="successMsg">
+        ✓ Aanvraag verstuurd! Kasper neemt zo snel mogelijk contact op via dj.boartn@gmail.com of +32 468 06 40 28.<br>
+        <span style="color:var(--muted);font-size:10px;">Check ook je spam-folder.</span>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<!-- CONTACT -->
+<div id="contact" class="section">
+  <div class="section-title">CONTACT</div>
+  <p class="bio-text">
+    Wil je DJ Boartn boeken of heb je een vraag? Stuur een mailtje, bel of WhatsApp, of gebruik de kalender om een datum aan te vragen.
+  </p>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <div class="cc-icon">✉</div>
+      <div class="cc-label">E-mail</div>
+      <div class="cc-val">dj.boartn@gmail.com</div>
+    </div>
+    <div class="contact-card">
+      <div class="cc-icon">📱</div>
+      <div class="cc-label">Telefoon / WhatsApp</div>
+      <div class="cc-val">+32 468 06 40 28</div>
+    </div>
+  </div>
+  <div style="margin-top:2rem;text-align:center;">
+    <button class="hero-cta" onclick="showSection('calendar')">BOEK EEN DATUM VIA KALENDER</button>
+  </div>
+</div>
+ 
+<script>
+  const monthNames = ['Januari','Februari','Maart','April','Mei','Juni','Juli','Augustus','September','Oktober','November','December'];
+  const monthShort = ['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
+ 
+  // Boekingen worden opgeslagen in localStorage zodat ze bewaard blijven
+  let bookings = JSON.parse(localStorage.getItem('djboartn_bookings') || '[]');
+  let curYear = new Date().getFullYear(), curMonth = new Date().getMonth();
+  let selectedDate = null, adminOpen = false;
+ 
+  function saveBookings() {
+    localStorage.setItem('djboartn_bookings', JSON.stringify(bookings));
+  }
+ 
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    const idx = ['home','info','calendar','contact'].indexOf(id);
+    document.querySelectorAll('.nav-btn')[idx]?.classList.add('active');
+    if (id === 'calendar') renderAll();
+    window.scrollTo(0, 0);
+  }
+ 
+  function toggleAdmin() {
+    adminOpen = !adminOpen;
+    document.getElementById('adminPanel').style.display = adminOpen ? 'block' : 'none';
+    renderAdminList();
+  }
+ 
+  function addBooking() {
+    const datum = document.getElementById('aDatum').value;
+    const venue = document.getElementById('aVenue').value.trim();
+    const stad = document.getElementById('aStad').value.trim();
+    const tijd = document.getElementById('aTijd').value.trim();
+    if (!datum || !venue) { alert('Vul minstens een datum en venue in.'); return; }
+    bookings.push({ date: datum, venue, city: stad || '', time: tijd || '' });
+    bookings.sort((a,b) => a.date.localeCompare(b.date));
+    ['aDatum','aVenue','aStad','aTijd'].forEach(id => document.getElementById(id).value = '');
+    saveBookings();
+    renderAll();
+    renderAdminList();
+  }
+ 
+  function deleteBooking(idx) {
+    bookings.splice(idx, 1);
+    saveBookings();
+    renderAll();
+    renderAdminList();
+  }
+ 
+  function renderAdminList() {
+    const el = document.getElementById('adminList');
+    if (!bookings.length) {
+      el.innerHTML = '<p style="font-size:11px;color:var(--muted);">Nog geen boekingen toegevoegd.</p>';
+      return;
+    }
+    el.innerHTML = bookings.map((b,i) => `
+      <div class="booking-admin-item">
+        <div>
+          <span style="font-family:var(--font);font-size:15px;letter-spacing:1px;">${b.date} — ${b.venue}</span>
+          <div style="font-size:10px;color:var(--muted);">${b.city}${b.time ? ' · ' + b.time : ''}</div>
+        </div>
+        <button class="del-btn" onclick="deleteBooking(${i})">✕ wis</button>
+      </div>`).join('');
+  }
+ 
+  function isBooked(y, m, d) {
+    const s = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    return bookings.find(b => b.date === s);
+  }
+ 
+  function renderBookingsList() {
+    const el = document.getElementById('bookingsList');
+    const today = new Date().toISOString().slice(0,10);
+    const upcoming = bookings.filter(b => b.date >= today);
+    if (!upcoming.length) {
+      el.innerHTML = '<div class="no-bookings">Momenteel nog geen geplande optredens. Gebruik de kalender om een datum aan te vragen!</div>';
+      return;
+    }
+    el.innerHTML = '<div style="font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:0.75rem;">Aankomende optredens</div>' +
+      upcoming.map(b => {
+        const dt = new Date(b.date + 'T12:00:00');
+        return `<div class="booking-item">
+          <div class="booking-date-box">
+            <div class="bd-day">${dt.getDate()}</div>
+            <div class="bd-mon">${monthShort[dt.getMonth()]}</div>
+          </div>
+          <div class="booking-info">
+            <div class="bi-name">${b.venue}</div>
+            <div class="bi-detail">${b.city}${b.time ? ' · ' + b.time : ''}</div>
+          </div>
+          <div class="booked-badge">GEBOEKT</div>
+        </div>`;
+      }).join('');
+  }
+ 
+  function renderCal() {
+    document.getElementById('calMonth').textContent = monthNames[curMonth] + ' ' + curYear;
+    const grid = document.getElementById('calGrid');
+    const days = ['MA','DI','WO','DO','VR','ZA','ZO'];
+    let html = days.map(d => `<div class="cal-day-name">${d}</div>`).join('');
+    const first = new Date(curYear, curMonth, 1);
+    let startDay = first.getDay();
+    startDay = startDay === 0 ? 6 : startDay - 1;
+    const totalDays = new Date(curYear, curMonth + 1, 0).getDate();
+    const today = new Date();
+    for (let i = 0; i < startDay; i++) html += `<div class="cal-cell empty"></div>`;
+    for (let d = 1; d <= totalDays; d++) {
+      const booked = isBooked(curYear, curMonth, d);
+      const cellDate = new Date(curYear, curMonth, d);
+      const isPast = cellDate < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      const isToday = cellDate.toDateString() === today.toDateString();
+      const thisStr = `${curYear}-${String(curMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      const selStr = selectedDate ? `${selectedDate.y}-${String(selectedDate.m+1).padStart(2,'0')}-${String(selectedDate.d).padStart(2,'0')}` : '';
+      const isSel = selStr === thisStr;
+      let cls = 'cal-cell';
+      if (booked) cls += ' booked';
+      else if (isPast) cls += ' past';
+      else if (isSel) cls += ' selected';
+      if (isToday) cls += ' today';
+      const click = (!booked && !isPast) ? `onclick="selectDate(${curYear},${curMonth},${d})"` : '';
+      html += `<div class="${cls}" ${click}><span class="day-num">${d}</span>${booked ? '<div class="dot"></div>' : ''}</div>`;
+    }
+    grid.innerHTML = html;
+  }
+ 
+  function renderAll() { renderBookingsList(); renderCal(); }
+ 
+  function selectDate(y, m, d) {
+    selectedDate = { y, m, d };
+    document.getElementById('selDateTxt').textContent = `${d} ${monthNames[m]} ${y}`;
+    document.getElementById('bookForm').style.display = 'block';
+    document.getElementById('successMsg').style.display = 'none';
+    ['fName','fVenue','fEmail','fPhone','fMsg'].forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
+    renderCal();
+    setTimeout(() => document.getElementById('bookForm').scrollIntoView({ behavior: 'smooth' }), 100);
+  }
+ 
+  function changeMonth(dir) {
+    curMonth += dir;
+    if (curMonth > 11) { curMonth = 0; curYear++; }
+    if (curMonth < 0) { curMonth = 11; curYear--; }
+    selectedDate = null;
+    document.getElementById('bookForm').style.display = 'none';
+    renderAll();
+  }
+ 
+  function submitForm() {
+    const name = document.getElementById('fName').value.trim();
+    const email = document.getElementById('fEmail').value.trim();
+    if (!name || !email) { alert('Vul minstens je naam en e-mailadres in.'); return; }
+    document.getElementById('successMsg').style.display = 'block';
+    document.getElementById('successMsg').scrollIntoView({ behavior: 'smooth' });
+  }
+ 
+  renderAll();
+</script>
+</body>
+</html>
+ 
